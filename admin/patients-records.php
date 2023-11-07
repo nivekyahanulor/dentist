@@ -118,17 +118,44 @@
 									<thead>
 									  <tr>
 										<th scope="col" class="text-center"> PRESCRIPTION</th>
-										<th scope="col" class="text-start"> DATE ADDED</th>
+										<th scope="col" class="text-center"> DATE ADDED</th>
+										<th scope="col" class="text-center"> ACTION</th>
 									  </tr>
 									</thead>
 									<tbody>
 									<?php while($val = $tb_prescription->fetch_object()){ ?>
 									  <tr>
 										<td class="text-center"><?php echo $val->prescription;?></td>
-										<td class="text-start"><?php echo $val->date_added;?></td>
+										<td class="text-center"><?php echo $val->date_added;?></td>
+										<td class="text-center"><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#print<?php echo $val->id;?>"> Print </button></td>
 										
 									  </tr>
-									
+										<div class="modal fade done" id="print<?php echo $val->id ;?>" tabindex="-1">
+										<div class="modal-dialog modal-dialog-centered">
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <h5 class="modal-title">Print Prescriptions </h5>
+											  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+											  <form class="row g-3" method="POST">
+												<br>
+												<div class="col-md-12">
+													<div id="myDiv">
+														<p><?php echo $val->prescription;?></p>
+													</div>
+												</div>
+											
+											</div>
+											
+											<div class="modal-footer">
+											  <button type="button" class="btn btn-success done-schedule" onclick="PrintDiv('myDiv')">Print</button>
+											  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											</div>
+											</form>
+										  </div>
+										</div>
+										</div>
 									<?php } ?>
 									</tbody>
 									</table>
@@ -203,3 +230,22 @@
              </div>
 			  
 <?php include("footer.php");?>
+ <script type="text/javascript">
+        function PrintDiv(id) {
+            var data=document.getElementById(id).innerHTML;
+            var myWindow = window.open('', 'my div', 'height=400,width=600');
+            myWindow.document.write('<html><head><title>my div</title>');
+            /*optional stylesheet*/ //myWindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+            myWindow.document.write('</head><body >');
+            myWindow.document.write(data);
+            myWindow.document.write('</body></html>');
+            myWindow.document.close(); // necessary for IE >= 10
+
+            myWindow.onload=function(){ // necessary if the div contain images
+
+                myWindow.focus(); // necessary for IE >= 10
+                myWindow.print();
+                myWindow.close();
+            };
+        }
+    </script>

@@ -37,7 +37,7 @@
 	        	<li class="nav-item"><a href="services" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="contact" class="nav-link">Contact</a></li>
 	        	<li class="nav-item"><a href="login" class="nav-link">Login</a></li>
-	        	<li class="nav-item"><a href="resgister" class="nav-link">Register</a></li>
+	        	<li class="nav-item"><a href="register" class="nav-link">Register</a></li>
 	        </ul>
 	      </div>
 	    </div>
