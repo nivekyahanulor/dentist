@@ -56,8 +56,8 @@ include('database.php');
 				// $message = 'failed';
 			// }
 			
-		$mysqli->query("INSERT INTO tbl_signup (firstname,lastname,email,address,sex,birthday,password,type,mobile) 
-								VALUES ('$fname','$lname','$email','$address','$sex','$bday','$password','patient','$mobile')");
+		$mysqli->query("INSERT INTO tbl_signup (firstname,lastname,email,address,sex,birthday,password,type,mobile,is_confirm) 
+								VALUES ('$fname','$lname','$email','$address','$sex','$bday','$password','patient','$mobile',1)");
 		echo "<script> window.location.href='login.php?registered'; </script>";
 		
 	}
