@@ -60,17 +60,17 @@ if(isset($_SESSION['type'])){
                 <div class="card-body">
 					<?php 
 						 if(isset($_GET['registered'])){
-							echo '<br> <div class="alert alert-success alert-dismissible fade show" role="alert"> <center><i class="bi bi-check-circle me-1"></i> REGISTRATION SUCCESS ! <br> PLEASE VERIFY YOUR ACCOUNT TO YOUR EMAIL ADDRESS TO LOGIN USING YOUR ACCOUNT!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+							echo '<br> <div class="alert alert-success alert-dismissible fade show" role="alert"> <center><i class="bi bi-check-circle me-1"></i> REGISTRATION SUCCESS ! <br> LOGIN USING YOUR ACCOUNT!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 						} 
 					?>
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">Enter your Email Address</h5>
 					<?php if(isset($_GET['error'])){?>
-						<p class="text-center small" style="color:red;">Error! Please check your Email and Password !</p>
+						<p class="text-center small" style="color:red;">Error! Email not found!</p>
 					<?php } ?>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="post" action="controller/auth.php" novalidate>
+                  <form class="row g-3 needs-validation" method="post" action="controller/forgot-password.php" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email Address : </label>
@@ -80,20 +80,12 @@ if(isset($_SESSION['type'])){
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password : </label>
-                      <input type="password" name="password" class="form-control" id="yourPassword"  autocomplete="off"  required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
-
+             
                     
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" type="submit">Send Code</button>
                     </div>
-                    <div class="col-12">
-                    
-                     <center>   <p class="small mb-0">Forgot Password ? <a href="forgot-password.php">Click here</a></p> <p class="small mb-0">Don't have account? <a href="register.php">Create an account</a></p> </center>
-                    </div>
+                  
                   </form>
 
                 </div>

@@ -81,6 +81,13 @@
 											  <input type="text" class="form-control" name="address" value="<?php echo $val->address;?>" required>
 											</div><br>
 											<div class="col-md-12">
+											  <label for="inputName5" class="form-label">User Type : </label>
+											  <select type="text" class="form-control" name="email" value="<?php echo $val->email;?>" required>
+												<option value=1> Administrator </option>
+												<option value=2> Staff </option>
+											  </select>
+											</div><br>
+											<div class="col-md-12">
 											  <label for="inputName5" class="form-label">Current Password : </label>
 											 <div class="input-group mb-3 " >
 											  <input type="password" class="form-control" name="cpassword" id="cpassword<?php echo $val->id ;?>" required>
@@ -173,7 +180,15 @@
 						<div class="col-md-12">
 						  <label for="inputName5" class="form-label">Address : </label>
 						  <input type="text" class="form-control" name="address" required>
-						</div><br>
+						</div>
+					<div class="col-md-12">
+											  <label for="inputName5" class="form-label">User Type : </label>
+											  <select class="form-control" name="usertype"  required>
+												<option value=""> -Select- </option>
+												<option value="admin"> Administrator </option>
+												<option value="staff"> Staff </option>
+											  </select>
+											</div><br>
 						<div class="col-md-12">
 						  <label for="inputName5" class="form-label">Password : </label>
 						  <input type="password" class="form-control" name="password" required>

@@ -3,7 +3,7 @@ include('database.php');
 
  error_reporting(0);
 
-$tbl_signup = $mysqli->query("SELECT * from tbl_signup where type='admin'");
+$tbl_signup = $mysqli->query("SELECT * from tbl_signup where type='admin' or type = 'staff'");
 
 $data       =  $_GET['data'];
 $account    = $mysqli->query("SELECT * FROM tbl_signup where id = '$data'");
@@ -15,9 +15,11 @@ if(isset($_POST['add-user'])){
 	$lname    = $_POST['lname'];
 	$email    = $_POST['email'];
 	$address  = $_POST['address'];
+	$type     = $_POST['usertype'];
 	$password = md5($_POST['password']);
 	
-	$mysqli->query("INSERT INTO tbl_signup (firstname,lastname,email,address,password,type,is_confirm) VALUES ('$fname','$lname','$email','$address','$password','admin',1)");
+	$mysqli->query("INSERT INTO tbl_signup (firstname,lastname,email,address,password,type,is_confirm) VALUES ('$fname','$lname','$email','$address','$password','$type',1)");
+	
 	 echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

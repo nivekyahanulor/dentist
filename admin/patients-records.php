@@ -18,7 +18,7 @@
         <div class="content-body">
 			<div class="row">
 				<div class="col-12">
-				 <h1>Patients : (<?php echo $_GET['name'];?>) </h1>
+				 <h1>Patient : <?php echo $_GET['name'];?> </h1>
 				 <hr>
 					<div class="card">
 					<div class="card-content">
@@ -31,9 +31,9 @@
 							  <li class="nav-item">
 								<a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">DENTAL HISTORY</a>
 							  </li>
-							 <li class="nav-item">
+							<!-- <li class="nav-item">
 								<a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">PRESCRIPTION </a>
-							  </li>
+							  </li>-->
 							 
 							
 							</ul>
@@ -92,19 +92,52 @@
 									<thead>
 									  <tr>
 										<th scope="col" class="text-center"> DATE CHECKUP</th>
+										<th scope="col" class="text-center"> PRESCRIPTION</th>
 										<th scope="col" class="text-start"> FINDINGS</th>
 										<th scope="col" class="text-start"> REMARKS</th>
+										<th scope="col" class="text-start"> </th>
 									  </tr>
 									</thead>
 									<tbody>
 									<?php while($val = $tbl_history_patient->fetch_object()){ ?>
 									  <tr>
 										<td class="text-center"><?php echo $val->dcu;?></td>
+										<td class="text-center"><?php echo $val->prescription;?></td>
 										<td class="text-start"><?php echo $val->findings;?></td>
 										<td class="text-start"><?php echo $val->remarks;?></td>
-										
+										<td class="text-center"><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#print<?php echo $val->id;?>"> Print </button></td>
 									  </tr>
-									
+									<div class="modal fade done" id="print<?php echo $val->id ;?>" tabindex="-1">
+										<div class="modal-dialog modal-dialog-centered">
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <h5 class="modal-title">Print Dental History </h5>
+											  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+											  <form class="row g-3" method="POST">
+												<br>
+												<div class="col-md-12">
+													<div id="myDiv">
+													<center><img class="brand-logo" alt="modern admin logo" src="../assets/images/logo.png" style="width:200px;"></center>
+													<br><br>
+													Patient Name : <?php echo $_GET['name'];?><br><br>
+													Prescription <br><p><?php echo $val->prescription;?></p><br>
+													Findings <br><p><?php echo $val->findings;?></p><br>
+													Remarks <br><p><?php echo $val->remarks;?></p><br>
+													</div>
+												</div>
+											
+											</div>
+											
+											<div class="modal-footer">
+											  <button type="button" class="btn btn-success done-schedule" onclick="PrintDiv('myDiv')">Print</button>
+											  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											</div>
+											</form>
+										  </div>
+										</div>
+										</div>
 									<?php } ?>
 									</tbody>
 									</table>
@@ -130,32 +163,7 @@
 										<td class="text-center"><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#print<?php echo $val->id;?>"> Print </button></td>
 										
 									  </tr>
-										<div class="modal fade done" id="print<?php echo $val->id ;?>" tabindex="-1">
-										<div class="modal-dialog modal-dialog-centered">
-										  <div class="modal-content">
-											<div class="modal-header">
-											  <h5 class="modal-title">Print Prescriptions </h5>
-											  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-											  <form class="row g-3" method="POST">
-												<br>
-												<div class="col-md-12">
-													<div id="myDiv">
-														<p><?php echo $val->prescription;?></p>
-													</div>
-												</div>
-											
-											</div>
-											
-											<div class="modal-footer">
-											  <button type="button" class="btn btn-success done-schedule" onclick="PrintDiv('myDiv')">Print</button>
-											  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											</div>
-											</form>
-										  </div>
-										</div>
-										</div>
+										
 									<?php } ?>
 									</tbody>
 									</table>
@@ -171,7 +179,7 @@
       </div>
     </div>
 	<div class="modal fade" id="addservice" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">HISTORY DETAILS</h5>
@@ -186,12 +194,21 @@
 						  <input type="hidden" name="name" value="<?php echo $_GET['name'];?>">
 						</div>
 						<div class="col-md-12">
+						<br>
 						  <label for="inputName5" class="form-label">Findings: </label>
-						  <textarea type="text" class="form-control" name="findings" required></textarea>
-						</div>
+						  <textarea type="text" class="" name="findings"  id="summernote" required></textarea>
+						</div><br>
+						
 						<div class="col-md-12">
+						<br>
+						  <label for="inputName5" class="form-label">Prescriptions: </label>
+						  <textarea type="text" class="form-control" id="summernote1"  name="prescriptions" required></textarea>
+						</div><br>
+						
+						<div class="col-md-12">
+						<br>
 						  <label for="inputName5" class="form-label">Remarks: </label>
-						  <textarea type="text" class="form-control" name="remarks" required></textarea>
+						  <textarea type="text" class="form-control" id="summernote2" name="remarks" required></textarea>
 						</div>
                     </div>
                     <div class="modal-footer">
@@ -249,3 +266,10 @@
             };
         }
     </script>
+	
+	<script>
+	  $('#summernote').summernote();
+	  $('#summernote1').summernote();
+	  $('#summernote2').summernote();
+		
+	</script>

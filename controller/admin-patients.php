@@ -70,12 +70,13 @@ if(isset($_POST['add-record'])){
 	$user_id   = $_POST['user_id'];
 	$name      = $_POST['name'];
 	$findings  = $_POST['findings'];
+	$prescriptions  = $_POST['prescriptions'];
 	$remarks   = $_POST['remarks'];
 	$dcu   = $_POST['dcu'];
 		
 		
 	
-	$mysqli->query("INSERT INTO tbl_history (user_id,findings,remarks,dcu) VALUES ('$user_id','$findings','$remarks','$dcu')");
+	$mysqli->query("INSERT INTO tbl_history (user_id,findings,prescription,remarks,dcu) VALUES ('$user_id','$findings','$prescriptions','$remarks','$dcu')");
 	  echo '<script>
 			  $(document).ready(function() {
 					Swal.fire({

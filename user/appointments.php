@@ -17,7 +17,23 @@
         </div>
         <div class="content-body">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-xl-6 col-12">
+			<div class="card crypto-card-3 pull-up">
+				<div class="card-content">
+					<div class="card-body pb-0">
+						<div class="row">
+							<div class="col-12 pl-2">
+								<h3>CALENDAR</h3>
+								<div id="calendar"></div>
+								<br>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+			</div>
+				<div class="col-xl-6 col-12">
 					<div class="card">
 					
 						<div class="card-header">
@@ -158,7 +174,10 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">APPOINTMENT DETAILS</h5>
+	
+                      <h5 class="modal-title">APPOINTMENT DETAILS <br>
+					  <small> Note :  9 Appointment Transaction per day </small></h5>
+					 
                       <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -207,7 +226,7 @@
 						
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary" id="process" name="submit-schedule" >Process</button>
-					  <div id="not-available" clas="text-center" style="display:none;"> Sorry , This Date / Time is not available! </div>
+					  <div id="not-available" clas="text-center" style="display:none;"> Sorry , This Date / Time is not available! <br> Please use another time! </div>
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
 					</form>

@@ -55,11 +55,17 @@
         }else if ($page == 'admins' ) {
             $admins = 'active';
         }
+		else if ($page == 'reports' ) {
+            $reports = 'active';
+        }else if ($page == 'about' ) {
+            $about = 'active';
+        }
 		
 	?>
     <div class="main-menu menu-fixed  menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+		<?php if($_SESSION['type'] == 'admin'){?>
           <li class=" nav-item <?php echo $dashboard;?>"><a href="index"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a> </li>
 		
 		  <li class="nav-item has-sub open  <?php echo $appointments;?>"><a href="#"><i class="la la-calendar"></i><span class="menu-title" data-i18n="Invoice">Appointments</span></a>
@@ -73,7 +79,21 @@
           <li class=" nav-item <?php echo $patients;?>"><a href="patients"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Patients</span></a></li>
           <li class=" nav-item <?php echo $dentist;?>"><a href="dentist"><i class="la la-list"></i><span class="menu-title" data-i18n="Templates">Dentist</span></a></li>
           <li class=" nav-item <?php echo $services;?>"><a href="services"><i class="la la-clipboard"></i><span class="menu-title" data-i18n="eCommerce"> Services</span></a></li>
+          <li class=" nav-item <?php echo $reports;?>"><a href="reports"><i class="la la-bar-chart"></i><span class="menu-title" data-i18n="eCommerce"> Reports</span></a></li>
+          <li class=" nav-item <?php echo $about;?>"><a href="about"><i class="la la-gear"></i><span class="menu-title" data-i18n="eCommerce"> Settings</span></a></li>
           <li class=" nav-item <?php echo $users;?>"><a href="users"><i class="la la-user"></i><span class="menu-title" data-i18n="eCommerce">  Administrators</span></a></li>
+		<?php } else { ?>
+		 <li class=" nav-item <?php echo $dashboard;?>"><a href="index"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a> </li>
+		  <li class="nav-item has-sub open  <?php echo $appointments;?>"><a href="#"><i class="la la-calendar"></i><span class="menu-title" data-i18n="Invoice">Appointments</span></a>
+            <ul class="menu-content" style="">
+              <li class="is-shown"><a class="menu-item" href="appointments?data=pending"><i></i><span data-i18n="Invoice Summary">Pending</span></a></li>
+              <li class="is-shown"><a class="menu-item" href="appointments?data=approved"><i></i><span data-i18n="Invoice Summary">Approved</span></a></li>
+              <li class="is-shown"><a class="menu-item" href="appointments?data=declined"><i></i><span data-i18n="Invoice Summary">Declined</span></a></li>
+              <li class="is-shown"><a class="menu-item" href="appointments?data=done"><i></i><span data-i18n="Invoice Summary">Completed</span></a></li>
+            </ul>
+          </li>
+          <li class=" nav-item <?php echo $patients;?>"><a href="patients"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Patients</span></a></li>
+		<?php } ?>
           <li class=" nav-item"><a href="logout"><i class="la la-unlock"></i><span class="menu-title" data-i18n="eCommerce"> Sign-Out</span></a></li>
         </ul>
       </div>

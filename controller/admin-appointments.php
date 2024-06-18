@@ -26,13 +26,13 @@ if($status == 'pending'){
 if(isset($_POST['filter-appointments'])){
 $datefrom = $_POST['datefrom'];
 $dateend  = $_POST['dateend'];
-$tbl_appointments = $mysqli->query("SELECT a.* ,b.firstname , b.lastname, b.email, b.id as user_id , c.service, c.id as service_id, a.service_id as s_id ,c.price FROM tbl_appointments a 
+$tbl_appointments = $mysqli->query("SELECT a.* ,b.firstname , b.lastname, b.email, b.id as user_id , c.service, c.id as service_id, a.service_id as s_id ,c.price,b.patient_id FROM tbl_appointments a 
 									LEFT JOIN tbl_signup b on b.id = a.user_id
 									LEFT JOIN tbl_offer c on a.service_id = c.id
 									WHERE a.approved ='$stat' and (DATE(request_date) between '$datefrom' and '$dateend')
 									");	
 } else {
-$tbl_appointments = $mysqli->query("SELECT a.* ,b.firstname , b.lastname, b.email, b.id as user_id , c.service, a.service_id as s_id , c.id as service_id , c.price FROM tbl_appointments a 
+$tbl_appointments = $mysqli->query("SELECT a.* ,b.firstname , b.lastname, b.email, b.id as user_id , c.service, a.service_id as s_id , c.id as service_id , c.price,b.patient_id FROM tbl_appointments a 
 									LEFT JOIN tbl_signup b on b.id = a.user_id
 									LEFT JOIN tbl_offer c on a.service_id = c.id
 									WHERE a.approved ='$stat'

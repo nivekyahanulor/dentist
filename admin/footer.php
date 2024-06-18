@@ -14,7 +14,7 @@
 	  <span id="scroll-top"></span></span></p>
     </footer>
     <!-- END: Footer-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/popper.js"></script>
     <script src="../assets/js/bootstrap.js"></script>
@@ -42,6 +42,8 @@
 	<script src="https://code.highcharts.com/modules/data.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
     <script>
 	$(".alt-pagination").DataTable({pagingType:"full_numbers"});
 	$("#table-1").DataTable();
@@ -126,6 +128,7 @@
 					 $start = $res1->request_date;
 					 
 					 $tbl_date = $mysqli->query("SELECT  request_date ,approved FROM `tbl_appointments` where request_date='$start'");
+					 
 					 $dr       = $tbl_date->fetch_assoc();
 					 
 					 if($dr['dc'] >=11){

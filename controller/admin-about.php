@@ -1,7 +1,7 @@
 <?php
 include('database.php');
 
-error_reporting(0);
+// error_reporting(0);
 
 
 $tbl_about = $mysqli->query("SELECT * from tbl_about");

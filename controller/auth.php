@@ -26,6 +26,12 @@
 		$_SESSION['type']  = "admin";
 		$_SESSION['id']    = $row['id'];
 		header("location:../admin/index.php");
+	}else if($row["type"]=="staff") {
+		$_SESSION['email'] = $row['email'];
+		$_SESSION['name']  = $row['firstname'] .' '. $row['lastname'];
+		$_SESSION['type']  ="staff";
+		$_SESSION['id']    = $row['id'];
+		header("location:../admin/index.php");
 	}
 	else {
 		header("location:../login.php?error");

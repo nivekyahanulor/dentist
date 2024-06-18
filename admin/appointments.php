@@ -34,7 +34,7 @@
 								<table class="table " id="table-1">
 								<thead>
 								  <tr>
-									<th scope="col" class="text-center"> TRANSACTION NO. </th>
+									<th scope="col" class="text-center"> PATIENT ID  </th>
 									<th scope="col" class="text-start"> NAME OF PATIENTS </th>
 									<th scope="col" class="text-start"> SERVICE</th>
 									
@@ -65,7 +65,7 @@
 								<?php }} else { ?>
 								 <tr>
 								<?php } ?>
-									<td class="text-center"><?php echo $val->id;?></td>
+									<td class="text-center"><?php echo $val->patient_id;?></td>
 									<td class="text-start"><?php echo $val->firstname .' '. $val->lastname;?></td>
 									<td class="text-start">
 									<?php $services =  str_replace( array('[',']') , ''  ,$val->s_id );
@@ -79,7 +79,10 @@
 									<td class="text-center"><?php echo $val->request_date;?></td>
 									<td class="text-center"><?php echo date("g:i A", strtotime($val->request_time));?></td>
 									<?php if($_GET['data']=='cancelled' || $_GET['data']=='declined'){?>
-										<td class="text-text"><?php echo $val->cancel_reason;?></td>
+										<td class="text-text">
+										<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#reasons<?php echo $val->id;?>" data-id="<?php echo $val->id;?>"><i class="la la-times-circle"></i> View </button>
+									
+										</td>
 									<?php } ?>
 									<?php if($_GET['data'] != 'done' && $_GET['data'] !='declined' && $_GET['data'] !='cancelled'){?>
 									<td class="text-center">
@@ -227,6 +230,22 @@
 										  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 										</div>
 										</form>
+									  </div>
+									</div>
+									</div>
+									<div class="modal fade" id="reasons<?php echo $val->id ;?>" tabindex="-1">
+									<div class="modal-dialog modal-dialog-centered">
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <h5 class="modal-title">DECLINED APPOINTMENT </h5>
+										  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<?php echo $val->cancel_reason;?>
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										</div>
 									  </div>
 									</div>
 									</div>

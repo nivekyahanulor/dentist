@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/palette-gradient.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/cryptocoins.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/apexcharts.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" />
     <!-- END: Page CSS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   

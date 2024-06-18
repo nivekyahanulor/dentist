@@ -7,7 +7,9 @@ $tbl_appointments = $mysqli->query("SELECT a.* ,b.firstname , b.lastname , c.ser
 									LEFT JOIN tbl_offer c on a.service_id = c.id
 									where a.user_id = '$user'");
 
-
+$tbl_history_patient = $mysqli->query("SELECT a.* ,b.firstname , b.lastname FROM tbl_history a 
+									LEFT JOIN tbl_signup b on b.id = a.user_id WHERE b.id='$user'");
+									
 
 if(isset($_POST['check-date'])){
 	
@@ -15,7 +17,7 @@ if(isset($_POST['check-date'])){
 	$tbl_appointments = $mysqli->query("SELECT * FROM tbl_appointments where request_date = '$date' and approved!=4 ");
 	$count  = $tbl_appointments->num_rows;
 	
-	if($count != 9){
+	if($count !=9){
 		echo 'yes';
 	} else {
 		echo 'no';
@@ -26,10 +28,10 @@ if(isset($_POST['check-time'])){
 	
 	$date =  $_POST['date'];
 	$time =  $_POST['time'];
-	$tbl_appointments = $mysqli->query("SELECT * FROM tbl_appointments where request_date = '$date' and request_time = '$time'  and approved!=4 ");
+	$tbl_appointments = $mysqli->query("SELECT * FROM tbl_appointments where request_date = '$date' and approved!=4 ");
 	$count  = $tbl_appointments->num_rows;
 	
-	if($count == 0){
+	if($count != 9){
 		echo 'yes';
 	} else {
 		echo 'no';

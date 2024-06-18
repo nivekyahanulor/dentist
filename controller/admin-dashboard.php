@@ -30,3 +30,5 @@ $dentistcnt             = $tbl_dentist->num_rows;
 
 $tbl_offer		    	= $mysqli->query("SELECT * from tbl_offer ");
 $servicescnt            = $tbl_offer->num_rows;
+
+

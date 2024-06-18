@@ -1,8 +1,9 @@
-<?php include('header.php'); include('nav.php'); include('../controller/admin-dashboard.php');?>
+<?php include('header.php'); 
+include('nav.php'); 
+include('../controller/user-appointments.php');?>
    <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-   <?php include("include/nav.php");?>
 
 
     <!-- END: Main Menu-->
@@ -30,16 +31,47 @@
 				</div>
 			</div>
 			</div>
+				<div class="col-xxl-12 col-xl-12">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  
+                        <div id="container-services"></div>
+
+
+                </div>
+              </div>
+            </div>
 			<div class="col-xl-6 col-12">
 			<div class="card crypto-card-3 pull-up">
 				<div class="card-content">
 					<div class="card-body pb-0">
 						<div class="row">
 							<div class="col-12 pl-2">
-								<h3>CALENDAR</h3>
-								<div id="calendar"></div>
+								<h3>DENTAL HISTORY RECORD</h3>
+							<div class="table-responsive">
+								 <table class="table datatable"  id="table-2">
+									<thead>
+									  <tr>
+										<th scope="col" class="text-center"> DATE CHECKUP</th>
+										<th scope="col" class="text-start"> FINDINGS</th>
+										<th scope="col" class="text-start"> REMARKS</th>
+									  </tr>
+									</thead>
+									<tbody>
+									<?php while($val = $tbl_history_patient->fetch_object()){ ?>
+									  <tr>
+										<td class="text-center"><?php echo $val->dcu;?></td>
+										<td class="text-start"><?php echo $val->findings;?></td>
+										<td class="text-start"><?php echo $val->remarks;?></td>
+										
+									  </tr>
+									
+									<?php } ?>
+									</tbody>
+									</table>
 								<br>
 							</div>
+						</div>
 						</div>
 					</div>
 				
@@ -53,7 +85,7 @@
 						<div class="row">
 							<div class="col-12 pl-2">
 								<h3>YOUR APPOINTMENT</h3>
-															<div class="table-responsive">
+							<div class="table-responsive">
 							<table class="table datatable" id="table-1" >
 								<thead>
 								  <tr>
@@ -139,4 +171,108 @@
     <!-- END: Content-->
 
 
-<?php include("footer.php");?>
+<?php include("footers.php");?>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+ <?php
+
+  $user = $_SESSION['id'];
+  
+  
+  $n = 0;
+
+  $tbl_appointments1 = $mysqli->query("SELECT a.* ,b.firstname , b.lastname , c.service FROM tbl_appointments a 
+									LEFT JOIN tbl_signup b on b.id = a.user_id
+									LEFT JOIN tbl_offer c on a.service_id = c.id
+									where a.user_id = '$user'");
+  while($val = $tbl_appointments1->fetch_object()){ 
+					  $services1 =  str_replace( array('[',']') , ''  ,$val->service_id );
+					  $services2 =  str_replace( '"' , ' '  ,$services1 );
+									$res_ser = $mysqli->query("SELECT *, count(id)cnt  FROM tbl_offer where id IN ($services1) group by id");
+									while($val1 = $res_ser->fetch_object()){ 
+									
+										// if($services2  == $val1->id){
+												// $n = count($services2);
+										// } else {
+											// $n =1 + $val1->cnt;
+										// }
+										// echo $n;
+										 $months[] = $val1->service; 
+										 
+									}
+  
+  }
+	$myArray = array(1, 2, 3, 2, 1, 4, 5, 4); 
+ 
+	$countedValues = array_count_values($months); 
+	 
+	foreach ($countedValues as $key => $value) { 
+		
+			$array[] = array($key ,$value); 
+	} 
+	echo  json_encode(($array),JSON_NUMERIC_CHECK );
+  ?>
+ <script>
+	Highcharts.chart('container-services', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'My Service Statistics'
+    },
+    subtitle: {
+        text: 'Source: DATABASE'
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+            autoRotation: [-45, -90],
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Counts'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Statistics'
+    },
+    series: [{
+        name: 'Population',
+        colors: [
+            '#9b20d9', '#9215ac', '#861ec9', '#7a17e6', '#7010f9', '#691af3',
+            '#6225ed', '#5b30e7', '#533be1', '#4c46db', '#4551d5', '#3e5ccf',
+            '#3667c9', '#2f72c3', '#277dbd', '#1f88b7', '#1693b1', '#0a9eaa',
+            '#03c69b',  '#00f194'
+        ],
+        colorByPoint: true,
+        groupPadding: 0,
+        data: <?php  echo json_encode(($array),JSON_NUMERIC_CHECK );?>,
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            inside: true,
+            verticalAlign: 'top',
+            format: '{point.y}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+});
+
+
+ </script>
